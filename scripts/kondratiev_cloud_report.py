@@ -608,99 +608,104 @@ def build_html(r):
     )
 
     html = f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8"></head>
-<body style="font-family:'Microsoft YaHei',Arial,sans-serif;background-color:#1a1a2e;color:#e0e0e0;padding:20px;max-width:700px;margin:0 auto;">
-<div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:30px;border:1px solid #2a2a4a;">
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="font-family:'Microsoft YaHei',Arial,sans-serif;background-color:#f0f2f5;color:#1a1a1a;margin:0;padding:20px;">
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f0f2f5" style="background-color:#f0f2f5;"><tr><td align="center">
+<table width="700" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="width:700px;max-width:100%;background-color:#ffffff;border:1px solid #e0e0e0;border-radius:12px;overflow:hidden;">
 
-  <h1 style="color:#daa520;font-size:22px;margin:0 0 4px 0;">【康波月报】{r['month']}康波周期研判</h1>
-  <p style="color:#888;font-size:13px;margin:0 0 20px 0;">生成时间 {r['generated_at']} · 数据源：腾讯/新浪/东方财富 · 云端自动运行</p>
+  <tr><td style="background-color:#a67c00;padding:22px 30px;">
+    <h1 style="color:#ffffff;font-size:22px;margin:0;font-weight:bold;">【康波月报】{r['month']}康波周期研判</h1>
+    <p style="color:#f7eccb;font-size:13px;margin:6px 0 0 0;">生成时间 {r['generated_at']} · 数据源：腾讯/新浪/东方财富 · 云端自动运行</p>
+  </td></tr>
 
-  <div style="background:rgba(13,115,119,0.15);border-radius:8px;padding:16px 20px;margin-bottom:22px;border-left:4px solid #0d7377;">
-    <p style="color:#14a085;font-size:15px;font-weight:bold;margin:0 0 6px 0;">🎯 核心结论：{headline}</p>
+  <tr><td style="padding:30px;background-color:#ffffff;color:#1a1a1a;">
+
+  <div style="background-color:#e8f3f0;border-radius:8px;padding:16px 20px;margin-bottom:22px;border-left:4px solid #14a085;">
+    <p style="color:#0e7c6f;font-size:15px;font-weight:bold;margin:0 0 6px 0;">🎯 核心结论：{headline}</p>
     {summary_html}
   </div>
 
-  <h2 style="color:#daa520;font-size:17px;border-bottom:1px solid #2a2a4a;padding-bottom:8px;">一、关键市场数据速览</h2>
-  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;">
-    <tr style="border-bottom:1px solid #2a2a4a;">
-      <th style="text-align:left;padding:8px;color:#daa520;">指标</th>
-      <th style="text-align:right;padding:8px;color:#daa520;">最新值</th>
-      <th style="text-align:right;padding:8px;color:#daa520;">涨跌幅</th>
+  <h2 style="color:#a67c00;font-size:17px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;">一、关键市场数据速览</h2>
+  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;color:#333;">
+    <tr style="background-color:#f5f5f5;">
+      <th style="text-align:left;padding:8px;color:#333;">指标</th>
+      <th style="text-align:right;padding:8px;color:#333;">最新值</th>
+      <th style="text-align:right;padding:8px;color:#333;">涨跌幅</th>
     </tr>
     {''.join(rows)}
   </table>
 
-  <h2 style="color:#daa520;font-size:17px;border-bottom:1px solid #2a2a4a;padding-bottom:8px;">二、康波周期定位</h2>
-  <p style="line-height:1.8;font-size:14px;">
-    当前处于<strong style="color:#14a085">第五波康波萧条末 → 第六波回升初</strong>的历史性转折窗口。
+  <h2 style="color:#a67c00;font-size:17px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;">二、康波周期定位</h2>
+  <p style="line-height:1.8;font-size:14px;color:#333;">
+    当前处于<strong style="color:#0e7c6f">第五波康波萧条末 → 第六波回升初</strong>的历史性转折窗口。
     上一轮类似四周期共振底部出现在 1982-1983 年（随后开启第五波繁荣大牛市）。
     本次共振叠加 AI 主导技术革命，第六波康波（AI + 新能源 + 生物科技三驾马车）正进入回升早期。
-    策略含义：<strong style="color:#daa520">从防御逐步转向进攻，逢回调战略建仓。</strong>
+    策略含义：<strong style="color:#a67c00">从防御逐步转向进攻，逢回调战略建仓。</strong>
   </p>
-  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;">
-    <tr style="border-bottom:1px solid #2a2a4a;">
-      <th style="text-align:left;padding:8px;color:#daa520;">周期</th>
-      <th style="text-align:left;padding:8px;color:#daa520;">当前位置</th>
-      <th style="text-align:left;padding:8px;color:#daa520;">信号</th>
+  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;color:#333;">
+    <tr style="background-color:#f5f5f5;">
+      <th style="text-align:left;padding:8px;color:#333;">周期</th>
+      <th style="text-align:left;padding:8px;color:#333;">当前位置</th>
+      <th style="text-align:left;padding:8px;color:#333;">信号</th>
     </tr>
     {cycle_rows}
   </table>
 
-  <h2 style="color:#daa520;font-size:17px;border-bottom:1px solid #2a2a4a;padding-bottom:8px;">三、黄金专题：三属性定价模型</h2>
-  <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;">
-    <tr style="border-bottom:1px solid #2a2a4a;">
-      <th style="text-align:left;padding:8px;color:#daa520;">属性</th>
-      <th style="text-align:left;padding:8px;color:#daa520;">逻辑</th>
-      <th style="text-align:right;padding:8px;color:#daa520;">强度</th>
+  <h2 style="color:#a67c00;font-size:17px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;">三、黄金专题：三属性定价模型</h2>
+  <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;color:#333;">
+    <tr style="background-color:#f5f5f5;">
+      <th style="text-align:left;padding:8px;color:#333;">属性</th>
+      <th style="text-align:left;padding:8px;color:#333;">逻辑</th>
+      <th style="text-align:right;padding:8px;color:#333;">强度</th>
     </tr>
     {attr_rows}
   </table>
-  <p style="line-height:1.8;font-size:14px;">
-    当前黄金主驱动力为<strong style="color:#daa520">{attr_desc[r['main_attribute']][0]}</strong>。
+  <p style="line-height:1.8;font-size:14px;color:#333;">
+    当前黄金主驱动力为<strong style="color:#a67c00">{attr_desc[r['main_attribute']][0]}</strong>。
     过去一年涨幅 {pct(g['chg_1y'], True)}，近30日 {pct(g['chg_30d'], True)}，
     当日 {pct(g['chg_day'], True)}。
     美元端：{dx_line}
   </p>
-  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;">
-    <tr style="border-bottom:1px solid #2a2a4a;">
-      <th style="text-align:left;padding:8px;color:#daa520;">关键价位</th>
-      <th style="text-align:right;padding:8px;color:#daa520;">参考值</th>
+  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;color:#333;">
+    <tr style="background-color:#f5f5f5;">
+      <th style="text-align:left;padding:8px;color:#333;">关键价位</th>
+      <th style="text-align:right;padding:8px;color:#333;">参考值</th>
     </tr>
     {levels}
   </table>
 
-  <h2 style="color:#daa520;font-size:17px;border-bottom:1px solid #2a2a4a;padding-bottom:8px;">四、四周期共振分析</h2>
-  <p style="line-height:1.8;font-size:14px;">
-    四周期（康波/库兹涅茨/朱格拉/基钦）当前在 2025-2027 窗口形成<strong style="color:#14a085">罕见共振底部</strong>。
+  <h2 style="color:#a67c00;font-size:17px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;">四、四周期共振分析</h2>
+  <p style="line-height:1.8;font-size:14px;color:#333;">
+    四周期（康波/库兹涅茨/朱格拉/基钦）当前在 2025-2027 窗口形成<strong style="color:#0e7c6f">罕见共振底部</strong>。
     库存周期正从被动去库存转向主动补库存，企业盈利拐点临近；
     设备投资周期开启新起点，制造业资本开支有望回升；
     地产周期出清接近完成。共振底部 + 货币宽松预期，构成大类资产的战略配置窗口。
   </p>
 
-  <h2 style="color:#daa520;font-size:17px;border-bottom:1px solid #2a2a4a;padding-bottom:8px;">五、资产配置建议</h2>
-  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;">
-    <tr style="border-bottom:1px solid #2a2a4a;">
-      <th style="text-align:left;padding:8px;color:#daa520;">资产</th>
-      <th style="text-align:center;padding:8px;color:#daa520;">稳健型</th>
-      <th style="text-align:center;padding:8px;color:#daa520;">均衡型</th>
-      <th style="text-align:center;padding:8px;color:#daa520;">进取型</th>
-      <th style="text-align:left;padding:8px;color:#daa520;">逻辑</th>
+  <h2 style="color:#a67c00;font-size:17px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;">五、资产配置建议</h2>
+  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;color:#333;">
+    <tr style="background-color:#f5f5f5;">
+      <th style="text-align:left;padding:8px;color:#333;">资产</th>
+      <th style="text-align:center;padding:8px;color:#333;">稳健型</th>
+      <th style="text-align:center;padding:8px;color:#333;">均衡型</th>
+      <th style="text-align:center;padding:8px;color:#333;">进取型</th>
+      <th style="text-align:left;padding:8px;color:#333;">逻辑</th>
     </tr>
     {alloc_rows}
   </table>
 
-  <h2 style="color:#daa520;font-size:17px;border-bottom:1px solid #2a2a4a;padding-bottom:8px;">六、本月关注事件</h2>
-  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;">
-    <tr style="border-bottom:1px solid #2a2a4a;">
-      <th style="text-align:left;padding:8px;color:#daa520;">事件</th>
-      <th style="text-align:left;padding:8px;color:#daa520;">时间</th>
-      <th style="text-align:left;padding:8px;color:#daa520;">影响</th>
+  <h2 style="color:#a67c00;font-size:17px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;">六、本月关注事件</h2>
+  <table style="width:100%;border-collapse:collapse;margin:12px 0 24px 0;font-size:13px;color:#333;">
+    <tr style="background-color:#f5f5f5;">
+      <th style="text-align:left;padding:8px;color:#333;">事件</th>
+      <th style="text-align:left;padding:8px;color:#333;">时间</th>
+      <th style="text-align:left;padding:8px;color:#333;">影响</th>
     </tr>
     {ev_rows}
   </table>
 
-  <h2 style="color:#daa520;font-size:17px;border-bottom:1px solid #2a2a4a;padding-bottom:8px;">七、风险提示</h2>
-  <ol style="font-size:13px;line-height:1.9;color:#bbb;padding-left:20px;">
+  <h2 style="color:#a67c00;font-size:17px;border-bottom:1px solid #e0e0e0;padding-bottom:8px;">七、风险提示</h2>
+  <ol style="font-size:13px;line-height:1.9;color:#444;padding-left:20px;">
     <li>AI 泡沫化风险：若应用商业化不及预期，科技股可能回调 20-30%，需分批建仓。</li>
     <li>通胀反复：若通胀反弹迫使央行转鹰，黄金与成长股同承压，保留 15% 以上现金。</li>
     <li>地缘冲突升级：中美科技脱钩与地区冲突可能冲击供应链，配置需多元化。</li>
@@ -708,10 +713,14 @@ def build_html(r):
     <li>数据延迟说明：COMEX 期货为延时行情，外盘数据以交易所官方为准。</li>
   </ol>
 
-  <p style="color:#666;font-size:12px;margin-top:25px;border-top:1px solid #2a2a4a;padding-top:15px;">
+  <p style="color:#999;font-size:12px;margin-top:25px;border-top:1px solid #e0e0e0;padding-top:15px;">
     本报告由 WorkBuddy 康波周期云端自动化任务生成，仅供参考，不构成投资建议。投资有风险，决策需谨慎。
   </p>
-</div></body></html>"""
+
+  </td></tr>
+</table>
+</td></tr></table>
+</body></html>"""
     return html
 
 
