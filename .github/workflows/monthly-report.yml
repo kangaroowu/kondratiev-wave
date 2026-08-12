@@ -1,0 +1,49 @@
+name: 康波周期月度报告（云端自动执行）
+
+on:
+  schedule:
+    # 每月1号 00:00 UTC = 北京时间 08:00（GitHub 会在此后数分钟内触发）
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    # 支持手动触发测试：仓库 → Actions → 本工作流 → Run workflow
+
+jobs:
+  kondratiev-report:
+    name: 生成并发送康波月报
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 检查 Secrets 是否已配置
+        env:
+          SMTP_AUTH_CODE: ${{ secrets.SMTP_AUTH_CODE }}
+        run: |
+          if [ -z "$SMTP_AUTH_CODE" ]; then
+            echo "::error::缺少 SMTP_AUTH_CODE Secret。请在仓库 Settings → Secrets and variables → Actions 中添加："
+            echo "  SMTP_USER       发件邮箱（378261712@qq.com）"
+            echo "  SMTP_AUTH_CODE  QQ邮箱SMTP授权码"
+            echo "  MAIL_TO         收件邮箱"
+            exit 1
+          fi
+          echo "Secrets 检查通过 ✓"
+
+      - name: 运行康波月报脚本（抓取数据 → 分析 → 生成HTML → 发送邮件）
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_AUTH_CODE: ${{ secrets.SMTP_AUTH_CODE }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+        run: python scripts/kondratiev_cloud_report.py
+
+      - name: 运行日志摘要
+        if: always()
+        run: |
+          echo "=== 月报任务执行结束 ==="
+          ls -la output/ 2>/dev/null || echo "无报告输出（可能数据获取失败，详见上方日志）"
